@@ -4,10 +4,10 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 import express from "express";
-import cors from"cors";
+import cors from "cors";
 import { clerkMiddleware } from "@clerk/express"
-import getConnection from"./utils/getConnection.js";
-import clerkWebhooks from"./controllers/webhooks.js";
+import getConnection from "./utils/getConnection.js";
+import clerkWebhooks from "./controllers/webhooks.js";
 import connectCloudinary from "./config/cloudinary.js";
 
 import companyRoutes from "./routes/companyRoutes.js"
@@ -27,6 +27,8 @@ await connectCloudinary();
 app.get("/", (req, res) => {
      res.send("Backend Working")
 });
+
+console.log("Clerk Publishable Key:", process.env.CLERK_PUBLISHABLE_KEY)
 
 // app.post("/add-job", async (req, res) => {
 
@@ -49,7 +51,7 @@ app.get("/", (req, res) => {
 // app.post("/get-all-jobs", async (req, res) => {
 
 //      try {
-          
+
 //           const jobs =  await Jobs.find();
 //           res.status(200).json({ success: true, message: "Job Fetched Successfully", jobs : jobs });
 
@@ -68,7 +70,7 @@ app.use("/api/company", companyRoutes)
 
 app.use("/api/job", JobRoutes)
 
-app.use("/api/users/",userRoutes);
+app.use("/api/users/", userRoutes);
 
 app.listen(PORT, () => {
 
